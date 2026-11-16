@@ -24,10 +24,11 @@ def executar_menu(lista):
             titulo = input("Título: ").strip()
             categoria = input("Categoria: ").strip()
             descricao = input("Descrição: ").strip()
+            publico_alvo = input("Público-alvo: ").strip()
             canal = input("Canal/local: ").strip()
 
             # Validação dos campos obrigatórios
-            if not id_servico or not titulo or not categoria or not descricao or not canal:
+            if not id_servico or not titulo or not categoria or not descricao or not publico_alvo or not canal:
                 print("Erro: todos os campos são obrigatórios!")
                 continue
 
@@ -36,6 +37,7 @@ def executar_menu(lista):
                 titulo,
                 categoria,
                 descricao,
+                publico_alvo,
                 canal
             )
 
@@ -108,6 +110,7 @@ def executar_menu(lista):
             titulo = input("Novo título: ").strip()
             categoria = input("Nova categoria: ").strip()
             descricao = input("Nova descrição: ").strip()
+            publico_alvo = input("Novo público-alvo: ").strip()
             canal = input("Novo canal/local: ").strip()
 
             # Impede que campos informados sejam apenas espaços
@@ -116,6 +119,7 @@ def executar_menu(lista):
                 titulo=titulo if titulo else None,
                 categoria=categoria if categoria else None,
                 descricao=descricao if descricao else None,
+                publico_alvo=publico_alvo if publico_alvo else None,
                 canal=canal if canal else None
             )
 

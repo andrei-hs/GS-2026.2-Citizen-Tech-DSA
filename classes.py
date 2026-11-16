@@ -86,7 +86,7 @@ class ListaEncadeada:
         print(f"Serviço com o ID {id_servico} não encontrado!")
         return None
 
-    def atualizar_registro(self, id_servico, titulo=None, categoria=None, descricao=None, canal=None):
+    def atualizar_registro(self, id_servico, titulo=None, categoria=None, descricao=None, publico_alvo=None, canal=None):
         no = self.consultar_registro(id_servico)
 
         if no is None:
@@ -100,6 +100,9 @@ class ListaEncadeada:
 
         if descricao is not None:
             no.servico.descricao = descricao
+
+        if publico_alvo is not None:
+            no.servico.publico_alvo = publico_alvo
 
         if canal is not None:
             no.servico.canal = canal
@@ -176,11 +179,12 @@ class ListaEncadeada:
         return True
 
 class Servico:
-    def __init__(self, id_servico, titulo, categoria, descricao, canal):
+    def __init__(self, id_servico, titulo, categoria, descricao, publico_alvo, canal):
         self.id_servico = id_servico
         self.titulo = titulo
         self.categoria = categoria
         self.descricao = descricao
+        self.publico_alvo = publico_alvo
         self.canal = canal
 
 class No:
