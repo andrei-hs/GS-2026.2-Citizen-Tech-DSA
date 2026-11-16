@@ -119,6 +119,49 @@ class ListaEncadeada:
         print(f"Serviço com o ID {id_servico} não encontrado!")
         return False
 
+    def ordenar_registros(self, criterio="titulo"):
+
+        # Define os critérios permitidos
+        criterios_permitidos = ["titulo", "id_servico"]
+
+        criterio = criterio.lower().strip()
+
+        if criterio not in criterios_permitidos:
+            print("Critério inválido! Utilize 'titulo' ou 'id_servico'.")
+            return False
+
+        # Não há necessidade de ordenar uma lista vazia
+        # ou com apenas um registro
+        if self.head is None or self.head.proximo is None:
+            return True
+
+        houve_troca = True
+
+        # Repete enquanto houver alterações na ordenação
+        while houve_troca:
+            houve_troca = False
+            no_atual = self.head
+
+            while no_atual.proximo is not None:
+
+                valor_atual = getattr(no_atual.servico, criterio)
+                valor_proximo = getattr(no_atual.proximo.servico, criterio)
+
+                # Compara ignorando maiúsculas e minúsculas
+                if str(valor_atual).casefold() > str(valor_proximo).casefold():
+
+                    # Troca os serviços entre os nós
+                    no_atual.servico, no_atual.proximo.servico = (
+                        no_atual.proximo.servico,
+                        no_atual.servico
+                    )
+
+                    houve_troca = True
+
+                no_atual = no_atual.proximo
+
+        return True
+
 class Servico:
     def __init__(self, id_servico, titulo, categoria, descricao, canal):
         self.id_servico = id_servico
