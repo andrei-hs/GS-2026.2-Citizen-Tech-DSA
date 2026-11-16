@@ -19,8 +19,16 @@ class ListaEncadeada:
 
         self.size += 1
 
-    def consultar_registro(self, id_servico):
+    def consultar_registro(self, id_servico = None):
         no_atual = self.head
+
+        if id_servico == None:
+            # Mostrar todos os registros
+            while no_atual.proximo is not None:
+            # Placeholder para mostrar o registro
+                print(no_atual.servico.__dict__)
+
+            return
 
         while no_atual.servico.id_servico is not id_servico:
             no_atual = no_atual.proximo
