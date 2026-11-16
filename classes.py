@@ -12,12 +12,25 @@ class ListaEncadeada:
         else:
             atual = self.head
 
-            while atual.next is not None:
-                atual = atual.next
+            while atual.proximo is not None:
+                atual = atual.proximo
 
-            atual.next = novo_no
+            atual.proximo = novo_no
 
         self.size += 1
+
+    def consultar_registro(self, id_servico):
+        no_atual = self.head
+
+        while no_atual.servico.id_servico is not id_servico:
+            no_atual = no_atual.proximo
+
+        if no_atual == None:
+            print(f"Serviço com o id {id_servico} não encontrado!")
+
+        else:
+            # Placeholder para mostrar o registro
+            print(no_atual.servico.__dict__)
 
 class Servico:
     def __init__(self, id_servico, titulo, categoria, descricao, canal):
