@@ -4,11 +4,22 @@ class ListaEncadeada:
         self.size = 0
 
     def adicionar_servico(self, servico):
+
+        # Verifica se o identificador já existe
+        no_atual = self.head
+
+        while no_atual is not None:
+            if no_atual.servico.id_servico == servico.id_servico:
+                print("Erro: já existe um serviço com esse identificador!")
+                return False
+
+            no_atual = no_atual.proximo
+
+        # Cria o novo nó
         novo_no = No(servico)
 
         if self.head is None:
-            self.head = novo_no 
-
+            self.head = novo_no
         else:
             atual = self.head
 
@@ -18,6 +29,8 @@ class ListaEncadeada:
             atual.proximo = novo_no
 
         self.size += 1
+        print("Serviço cadastrado com sucesso!")
+        return True
 
     def consultar_registro(self, id_servico=None, atributo=None, termo=None):
         no_atual = self.head
