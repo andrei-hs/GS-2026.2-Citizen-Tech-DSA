@@ -19,18 +19,50 @@ class ListaEncadeada:
 
         self.size += 1
 
-    def consultar_registro(self, id_servico=None):
+    def consultar_registro(self, id_servico=None, atributo=None, termo=None):
         no_atual = self.head
 
-        if id_servico is None:
-            # Mostrar todos os registros
+        # Caso 1: Consultar todos os registros
+        if id_servico is None and atributo is None:
             while no_atual is not None:
                 print(no_atual.servico.__dict__)
                 no_atual = no_atual.proximo
-
             return
 
-        # Procurar o registro pelo ID
+        # Caso 2: Pesquisar por título ou categoria
+        if atributo is not None and termo is not None:
+
+            atributos_permitidos = ["titulo", "categoria"]
+            atributo = atributo.lower().strip()
+            termo = termo.strip()
+
+            if atributo not in atributos_permitidos:
+                print("Atributo inválido! Pesquise por título ou categoria.")
+                return []
+
+            if not termo:
+                print("O termo de pesquisa não pode estar vazio.")
+                return []
+
+            resultados = []
+
+            while no_atual is not None:
+                valor = getattr(no_atual.servico, atributo)
+
+                if termo.casefold() in valor.casefold():
+                    resultados.append(no_atual.servico)
+
+                no_atual = no_atual.proximo
+
+            if resultados:
+                for servico in resultados:
+                    print(servico.__dict__)
+            else:
+                print("Nenhum serviço encontrado.")
+
+            return resultados
+
+        # Caso 3: Pesquisar por ID
         while no_atual is not None:
             if no_atual.servico.id_servico == id_servico:
                 print(no_atual.servico.__dict__)
