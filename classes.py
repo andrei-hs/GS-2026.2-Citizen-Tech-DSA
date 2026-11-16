@@ -61,6 +61,32 @@ class ListaEncadeada:
 
         return True
 
+    def excluir_registro(self, id_servico):
+        no_atual = self.head
+        no_anterior = None
+
+        while no_atual is not None:
+
+            if no_atual.servico.id_servico == id_servico:
+
+                # Caso 1: o registro está no início da lista
+                if no_anterior is None:
+                    self.head = no_atual.proximo
+
+                # Caso 2: o registro está no meio ou no final
+                else:
+                    no_anterior.proximo = no_atual.proximo
+
+                self.size -= 1
+                return True
+
+            # Avança os ponteiros
+            no_anterior = no_atual
+            no_atual = no_atual.proximo
+
+        print(f"Serviço com o ID {id_servico} não encontrado!")
+        return False
+
 class Servico:
     def __init__(self, id_servico, titulo, categoria, descricao, canal):
         self.id_servico = id_servico
