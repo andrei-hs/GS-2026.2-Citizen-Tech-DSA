@@ -19,26 +19,47 @@ class ListaEncadeada:
 
         self.size += 1
 
-    def consultar_registro(self, id_servico = None):
+    def consultar_registro(self, id_servico=None):
         no_atual = self.head
 
-        if id_servico == None:
+        if id_servico is None:
             # Mostrar todos os registros
-            while no_atual.proximo is not None:
-            # Placeholder para mostrar o registro
+            while no_atual is not None:
                 print(no_atual.servico.__dict__)
+                no_atual = no_atual.proximo
 
             return
 
-        while no_atual.servico.id_servico is not id_servico:
+        # Procurar o registro pelo ID
+        while no_atual is not None:
+            if no_atual.servico.id_servico == id_servico:
+                print(no_atual.servico.__dict__)
+                return no_atual
+
             no_atual = no_atual.proximo
 
-        if no_atual == None:
-            print(f"Serviço com o id {id_servico} não encontrado!")
+        print(f"Serviço com o ID {id_servico} não encontrado!")
+        return None
 
-        else:
-            # Placeholder para mostrar o registro
-            print(no_atual.servico.__dict__)
+    def atualizar_registro(self, id_servico, titulo=None, categoria=None, descricao=None, canal=None):
+        no = self.consultar_registro(id_servico)
+
+        if no is None:
+            return False
+
+        if titulo is not None:
+            no.servico.titulo = titulo
+
+        if categoria is not None:
+            no.servico.categoria = categoria
+
+        if descricao is not None:
+            no.servico.descricao = descricao
+
+        if canal is not None:
+            no.servico.canal = canal
+
+        return True
 
 class Servico:
     def __init__(self, id_servico, titulo, categoria, descricao, canal):
