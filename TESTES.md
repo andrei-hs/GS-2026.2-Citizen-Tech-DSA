@@ -5,7 +5,7 @@
 ![Cadastro](prints/Cadastrar.png)
 
 ## 2. Consulta
-![Consulta Menu](prints/)
+![Consulta Menu](prints/Consulta%20Menu.png)
 
 ### 2.1. Consultar todos os serviços
 ![Consulta de todos os serviços](prints/Consultar%20todos%20os%20serviços.png)
